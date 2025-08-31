@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenShop - Easy Ecommerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            color: #FFD700; /* Yellow color */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo i {
+            margin-right: 12px;
+            font-size: 2.5rem;
+            color: #FFD700; /* Yellow color */
+            filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #444;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #25D366, #FFD700);
+            border-radius: 2px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            color: #25D366;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+        
+        .whatsapp-link:hover {
+            background-color: #128C7E;
+            transform: scale(1.03);
+        }
+        
+        .whatsapp-link i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .phone-number {
+            display: inline-block;
+            background-color: #25D366;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+                gap: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .logo i {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                padding: 1.2rem 1rem;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .tagline {
+                font-size: 0.95rem;
+            }
+            
+            .phone-number {
+                font-size: 1.1rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .footer-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-store"></i>
+            <span>CTCShop</span>
+        </div>
+        <p class="tagline">Quality products with simple purchasing </p>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Featured Products</h1>
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Wireless Headphones" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Wireless Headphones</h3>
+                    <p class="product-description">Premium sound quality with noise cancellation. Perfect for music lovers and professionals.</p>
+                    <p class="product-price">$89.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Wireless%20Headphones" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="Smart Watch" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Smart Watch</h3>
+                    <p class="product-description">Track your fitness goals, receive notifications, and stay connected with this sleek smartwatch.</p>
+                    <p class="product-price">$129.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Smart%20Watch" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12" alt="Bluetooth Speaker" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Bluetooth Speaker</h3>
+                    <p class="product-description">Portable speaker with impressive sound quality and 12-hour battery life.</p>
+                    <p class="product-price">$49.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Bluetooth%20Speaker" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" alt="Gaming Laptop" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Gaming Laptop</h3>
+                    <p class="product-description">High-performance laptop with dedicated graphics card for seamless gaming experience.</p>
+                    <p class="product-price">$1299.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Gaming%20Laptop" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86" alt="Running Shoes" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Running Shoes</h3>
+                    <p class="product-description">Lightweight and comfortable shoes designed for runners with advanced cushioning technology.</p>
+                    <p class="product-price">$79.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Running%20Shoes" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad" alt="Vitamin C Serum" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Vitamin C Serum</h3>
+                    <p class="product-description">Revitalize your skin with our antioxidant-rich serum that brightens and protects.</p>
+                    <p class="product-price">$29.99</p>
+                    <a href="https://wa.me/18768295357?text=I'm%20interested%20in%20Vitamin%20C%20Serum" class="whatsapp-link">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">Want to list your products on our simple store?</p>
+            <p class="footer-text">Just call us at:</p>
+            <div class="phone-number">
+                <i class="fas fa-phone-alt"></i> 876-829-5357
+            </div>
+            <p class="copyright">© 2023 GreenShop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to product cards when they come into view
+            const productCards = document.querySelectorAll('.product-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            productCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Add click event to WhatsApp links
+            const whatsappLinks = document.querySelectorAll('.whatsapp-link');
+            
+            whatsappLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const productName = this.previousElementSibling.previousElementSibling.textContent;
+                    console.log(`Customer interested in: ${productName}`);
+                    // In a real implementation, you might track this event with analytics
+                });
+            });
+        });
+    </script>
+</body>
+</html>
